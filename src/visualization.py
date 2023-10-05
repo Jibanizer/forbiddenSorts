@@ -2,6 +2,7 @@ import pygame
 
 pygame.init()
 
+# RELOCATE CONSTANTS TO SEPARATE FILE
 BLACK : tuple[int, int, int] = (0, 0, 0)
 GREY : tuple = (128, 128, 128)
 YELLOW : tuple = (255, 255, 0)
@@ -24,15 +25,18 @@ screen : pygame.Surface = pygame.display.set_mode(size =(WIDTH, HEIGHT))
 
 clock : pygame.time.Clock = pygame.time.Clock()
 
-def drawLines() -> None:
+def drawLines(input : list[int]) -> None:
     # top left is 0 0
-    max_val : int = max(data)
+    max_val : int = max(input)
 
-    for index, value in enumerate(data):
-        # To Do: Do dynamic scaling so big values are not drawn outside of height, and longer lists not outside of width, dynamic width?
+    for index, value in enumerate(input):
+        # To Do: longer lists not outside of width, dynamic width?
         temp : int = (HEIGHT-HEIGHT_OFFSET) * (value / max_val)
-        #pygame.draw.line(surface = screen, color = WHITE, start_pos = (0 + 20*index, HEIGHT), end_pos = (0 + 20*index, HEIGHT - value*20), width = 5)
-        pygame.draw.line(surface = screen, color = WHITE, start_pos = (WIDTH_OFFSET + WIDTH_STEP*index, HEIGHT), end_pos = (WIDTH_OFFSET + WIDTH_STEP*index, HEIGHT-temp), width = 5)
+        pygame.draw.line(surface = screen,
+                        color = WHITE, 
+                        start_pos = (WIDTH_OFFSET + WIDTH_STEP*index, HEIGHT), 
+                        end_pos = (WIDTH_OFFSET + WIDTH_STEP*index, HEIGHT-temp),
+                        width = 5)
 
 def main() -> None:
     running : bool = True
@@ -44,8 +48,10 @@ def main() -> None:
             if event.type == pygame.QUIT:
                 running = False
 
-        drawLines()
+        drawLines(data)
         pygame.display.update()
+        # Watch it groooooooow:
+        data[0] += 0.05
 
     pygame.quit()
 
