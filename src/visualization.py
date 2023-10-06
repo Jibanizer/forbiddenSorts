@@ -1,4 +1,5 @@
 import pygame
+from sorting import stalinSort
 
 pygame.init()
 
