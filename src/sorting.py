@@ -13,14 +13,22 @@ def stalinSort(input : list[int]) -> list[int]:
     """
     output : list[int] = []
     temp_val : int = 0
+    selected : list[int] = []
+    temp = [(input, [])]
     for index, value in enumerate(input):
         if index == 0:
             output.append(value)
             temp_val = value
+            selected.append(index)
         else:
+            selected.append(index)
             if value >= temp_val:
                 output.append(value)
                 temp_val = value
+                selected.pop(0)
+        temp.append((output + input[index+1:], selected))
+        # Something is still wrong with the selected indices
+        print(temp)
     return output
 
 # Sleep Sort

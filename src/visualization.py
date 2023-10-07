@@ -58,7 +58,6 @@ def main() -> None:
         pygame.display.update()
         # Watch it groooooooow and switch color:
         selected[0] = (selected[0] + 1) % len(data)
-        print(selected)
         data[0] += 0.05
 
     pygame.quit()
